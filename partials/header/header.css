@@ -1,0 +1,81 @@
+.title-bar {
+    background-color: #ccc;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #8f8f8f;
+}
+
+.title-bar span {
+    font-size: 29px;
+    font-family: 'Sansita Swashed', sans-serif;
+    margin-top: 7px;
+    margin-left: 18px;
+}
+
+.icons {
+    display: flex;
+    gap: 15px;
+}
+
+.settings-icon svg {
+    width: 32px;
+    height: 32px;
+    margin-right: 18px;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+/* Modal de configurações */
+#settingsModal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+#settingsModal .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 220px;
+    height: 220px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+#settingsConfirmYes, #settingsConfirmNo {
+    border: 2px solid black;
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: 5px auto;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 80px;
+    height: 50px;
+    background-color: white;
+}
+
+#settingsConfirmYes:hover, #settingsConfirmNo:hover {
+    background-color: #f0eeee;
+} 
+
+#settingsConfirmYes {
+    margin-top: 35px;
+    margin-bottom: 12px;
+}
+
+#settingsConfirmNo {
+    border: 2px solid rgba(215, 51, 37, 0.906);
+}

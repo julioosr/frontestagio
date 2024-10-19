@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #dddddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 0 50px;
+    margin-left: 70px;
+}
+
+button {
+    background-color: white;
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 240px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+button svg {
+    width: 57px;
+    height: 57px;
+    margin-bottom: 12px;
+}
+
+button p {
+    font-size: 26px;
+    color: #333;
+}
+
+.sair-btn {
+    border: 2px solid rgba(215, 51, 37, 0.906);
+}
+
+/* Modal sair */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.modal h2 {
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; 
+    text-align: center;
+    border-radius: 8px;
+}
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .modal-confirm, .modal-cancel {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal-confirm {
+    background-color: rgba(215, 51, 37, 0.906);
+    color: #fff;
+  }
+  
+  .modal-confirm:hover {
+    background-color: #c33;
+  }
+  
+  .modal-cancel:hover {
+    background-color: #ccc;
+  }
+
+  #confirmYes, #confirmNo {
+    border: 2px solid rgba(215, 51, 37, 0.906);
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; 
+    margin: 5px 2px; 
+    cursor: pointer;
+    border-radius: 5px; 
+    width: 80px;
+    height: 50px;
+}
+
+#confirmYes:hover, #confirmNo:hover {
+    background-color: #f0eeee;
+} 
+
+#confirmNo {
+    border: 2px solid black;
+}

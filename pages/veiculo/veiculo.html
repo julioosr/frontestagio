@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PróRegister</title>
+    <link rel="icon" href="/assets/images/logo4.png" type="image/x-icon" />
+    <link rel="stylesheet" href="veiculo.css">
+    <script src="veiculo.js"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <form class="form">
+        <div class="header-container">
+            <svg id="back-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+              </svg>
+            <h2>Cadastrar Veículo</h2>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group small-group">
+                <label for="id">ID</label>
+                <input type="text" id="id" value="00" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="marca">Marca</label>
+                <input type="text" id="marca">
+            </div>
+
+            <div class="form-group">
+                <label for="modelo">Modelo</label>
+                <input type="text" id="modelo">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="ano-fabricacao">Ano de Fabricação</label>
+                <input type="text" id="ano-fabricacao">
+            </div>
+
+            <div class="form-group">
+                <label for="cor">Cor</label>
+                <input type="text" id="cor">
+            </div>
+
+            <div class="form-group">
+                <label for="placa">Placa</label>
+                <input type="text" id="placa" required>
+            </div>
+
+            <div class="form-group">
+                <label for="renavam">Renavam</label>
+                <input type="text" id="renavam">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="cliente">Cliente</label>
+                <select id="cliente" required>
+                    <option value="" selected disabled></option>
+                    <option value="Julio">Julio Samuel Rodrigues</option>
+                    <option value="Juliano">Juliano Henrique Rodrigues</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit">Cadastrar</button>
+        </div>
+    </form>
+
+    <div id="footer"></div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>PróRegister</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/images/logo4.png" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>PróRegister</h2>
+      <form id="login-form" class="login-form" action="pages/home/home.html" method="POST">
+        <div class="form-group">
+          <label for="username">Usuário</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="form-group-btn">
+          <button type="submit" class="login-btn">Entrar</button>
+        </div>
+
+        <p class="support-text" onclick="sendMessage()">Suporte</p>
+      </form>
+    </div>
+  </body>
+</html>

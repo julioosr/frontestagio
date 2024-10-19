@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #dddddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.form {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #dddddd;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px; 
+}
+
+.header-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 25px;
+    margin-top: 12px;
+    flex-grow: 1;
+}
+
+.header-container svg {
+    cursor: pointer;
+    margin-left: 10px;
+    height: 38px;
+    width: 38px;
+    margin-bottom: 15px ;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 8px;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.form input, .form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.button-container button {
+    width: 18%;
+    padding: 12px;
+    background-color: #ccc;
+    border: 1px solid #000;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 8px;
+}
+
+.button-container button:hover {
+    background-color: #bbb;
+}
+
+.form-group.small-group {
+    max-width: 110px;
+}
+
+.form-group.small-group-two {
+    max-width: 220px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+#formDetails {
+    display: none;
+}
+
+/* modal confirmar */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.modal p {
+    font-size: 22px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; 
+    text-align: center;
+    border-radius: 8px;
+}
+
+.modal button {
+    background-color: #fefefe;
+    padding: 10px 20px;
+}
+
+#confirmEdit, #confirmNo {
+    border: 2px solid rgba(215, 51, 37, 0.906);
+    color: black;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; 
+    margin: 3px; 
+    margin-top: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 95px; 
+    height: 55px;
+    font-weight: normal;
+}
+
+#confirmEdit:hover, #confirmNo:hover {
+    background-color: #f0eeee;
+} 
+
+#confirmNo {
+    border: 2px solid black;
+}
