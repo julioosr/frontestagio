@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PróRegister</title>
+    <link rel="icon" href="/assets/images/logo4.png" type="image/x-icon" />
+    <link rel="stylesheet" href="ordem.css">
+    <script defer src="ordem.js"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <form class="form">
+        <div class="header-container">
+            <svg id="back-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+              </svg>
+            <h2>Lançar Serviço</h2>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group small-group">
+                <label for="id">ID</label>
+                <input type="text" id="id" value="00" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="cliente">Cliente</label>
+                <select id="cliente" required>
+                    <option value="" selected disabled></option>
+                    <option value="Julio">Julio Samuel Rodrigues</option>
+                    <option value="Juliano">Juliano Henrique Rodrigues</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="veiculo">Veículo</label>
+                <select id="veiculo" disabled required>
+                    <option value="" selected disabled></option>
+                    <option value="veiculo-um">Veículo 1</option>
+                    <option value="veiculo-dois">Veículo 2</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="servico">Serviço</label>
+                <select id="servico" required>
+                    <option value="" selected disabled></option>
+                    <option value="Servico1">Serviço 1</option>
+                    <option value="Servico2">Serviço 2</option>
+                    <option value="Servico3">Serviço 3</option>
+                </select>
+            </div>
+            <button type="button" id="adicionar-servico">Adicionar Serviço</button>
+        </div>
+
+        <div class="form-row">
+            <label class="servico">Serviços Selecionados:</label>
+            <ul id="servicos-selecionados"></ul> 
+        </div>
+
+        <div class="form-row-two">
+            <div class="form-group small-group-two">
+                <label for="data">Data</label>
+                <input type="date" id="data">
+            </div>
+
+            <div class="form-group small-group-two">
+                <label for="horario">Horário</label>
+                <input type="time" id="horario">
+            </div>
+
+            <div class="form-group invisible">
+                <label for="vazio"></label>
+                <input type="text" id="vazio">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group small-group-two">
+                <label for="valor-pago">Valor Pago</label>
+                <input type="text" id="valor-pago" required>
+            </div>
+
+            <div class="form-group small-group-two">
+                <label for="desconto">Desconto</label>
+                <input type="text" id="desconto" required>
+            </div>
+
+            <div class="form-group small-group-two">
+                <label for="valor-em-aberto">Valor em Aberto</label>
+                <input type="text" id="valor-em-aberto" required>
+            </div>
+
+            <div class="form-group invisible">
+                <label for="vazio"></label>
+                <input type="text" id="vazio">
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit">Lançar</button>
+        </div>
+    </form>
+
+    <div id="footer"></div>
+</body>
+</html>
