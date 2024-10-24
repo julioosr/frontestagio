@@ -76,7 +76,7 @@ body {
     border: 1px solid #000;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 100px;
+    margin-top: 40px;
     font-weight: bold;
 }
 
@@ -115,17 +115,17 @@ textarea {
     flex: 1;
 }
 
-.form-row #adicionar-servico {
+.form-row #adicionar-servico, .form-row #adicionar-pagamento {
     margin-bottom: -6px;
 }
 
-#adicionar-servico {
+#adicionar-servico, #adicionar-pagamento {
     height: 40px;
     padding: 0 15px; 
     display: inline-block;
 }
 
-#servicos-selecionados {
+#servicos-selecionados, #pagamentos-selecionados {
     display: flex; 
     flex-wrap: wrap; 
     list-style-type: none; 
@@ -133,11 +133,11 @@ textarea {
     margin: 0;
 }
 
-.form-row .servico {
+.form-row .servico, .form-row .pagamentos {
     font-style: italic;
 }
 
-#servicos-selecionados li {
+#servicos-selecionados li, #pagamentos-selecionados li {
     background-color: #f0f0f0; 
     padding: 6px 10px; 
     margin-top: 80px;

@@ -49,7 +49,7 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="servico">Serviço</label>
-                <select id="servico" required>
+                <select id="servico">
                     <option value="" selected disabled></option>
                     <option value="Servico1">Serviço 1</option>
                     <option value="Servico2">Serviço 2</option>
@@ -101,6 +101,25 @@
                 <label for="vazio"></label>
                 <input type="text" id="vazio">
             </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="forma-pagamento">Forma de Pagamento</label>
+                <select id="forma-pagamento" required>
+                    <option value="" selected disabled></option>
+                    <option value="Nao-efetuado">Não Efetuado</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Cartao">Cartão</option>
+                </select>
+            </div>
+            <button type="button" id="adicionar-pagamento">Adicionar Serviço</button>
+        </div>
+
+        <div class="form-row">
+            <label class="pagamentos">Pagamentos Selecionados:</label>
+            <ul id="pagamentos-selecionados"></ul> 
         </div>
 
         <div class="button-container">
