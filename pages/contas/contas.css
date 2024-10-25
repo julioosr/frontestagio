@@ -40,7 +40,7 @@ body {
     margin-left: 10px;
     height: 38px;
     width: 38px;
-    margin-bottom: 15px ;
+    margin-bottom: 15px;
 }
 
 .form-group {
@@ -137,6 +137,21 @@ tr svg {
     cursor: pointer;
 }
 
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.blur {
+    filter: blur(0.2px);
+    opacity: 0.3; 
+    pointer-events: none;
+}
+
+/* Modal editar pagamento */
 .modal {
     display: none;
     position: fixed;
@@ -150,23 +165,86 @@ tr svg {
   
 .modal-inner {
     background-color: #fff;
-    margin: 15% auto;
+    margin: 9% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 300px;
     text-align: center;
-}
-  
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+    display: flex;
+    flex-direction: column; /* Coloca os elementos em coluna */
 }
 
-.blur {
-    filter: blur(0.2px);
-    opacity: 0.3; 
-    pointer-events: none;
+.modal h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.modal p {
+    margin-bottom: 20px;
+}
+
+.modal .form-row {
+    display: flex;
+    flex-direction: column; /* Coloca os elementos em coluna */
+    margin-bottom: 15px; /* Espaçamento entre os grupos */
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+.modal .form-group {
+    display: flex;
+    flex-direction: column; /* Coloca os campos em coluna */
+    margin-bottom: -4px;
+}
+
+.modal label {
+    margin-bottom: 6px; /* Espaçamento entre o rótulo e o campo */
+    font-weight: bold; /* Destaca os rótulos */
+    font-size: 14px;
+}
+
+.modal input, .modal select {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 10px); 
+    margin-left: 5px; 
+    margin-right: 5px; 
+}
+
+.modal button {
+    padding: 10px 15px; 
+    background-color: #fefefe; 
+    color: black; 
+    border: 2px solid rgba(215, 51, 37, 0.906); 
+    border-radius: 4px; 
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.modal .button-row {
+    display: flex;
+    justify-content: center; /* Alinha os botões ao centro */
+    gap: 10px; /* Espaçamento entre os botões */
+    margin-top: 10px;
+}
+
+.modal .button-row button {
+    width: 120px; /* Define uma largura fixa para ambos os botões */
+    padding: 10px;
+    background-color: #fefefe;
+    color: black;
+    border: 2px solid rgba(215, 51, 37, 0.906);;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.modal #cancelar {
+    border-color: black; 
+}
+
+.modal button:hover {
+    background-color: #f0eeee; 
 }

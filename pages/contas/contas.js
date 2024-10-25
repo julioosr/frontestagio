@@ -70,6 +70,11 @@ function initializeModals() {
             }
         });
 
+        // Fecha o modal ao clicar no botão "Cancelar"
+        document.getElementById("cancelar").addEventListener('click', function() {
+            closeModal();
+        });
+
         // Fecha o modal ao pressionar a tecla Esc
         window.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
@@ -98,21 +103,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const rows = document.querySelectorAll("tbody tr");
   
     rows.forEach((row) => {
-      const valorEmAberto = row.querySelector("td:nth-child(5)").textContent.trim();
-      const svgIcon = row.querySelector("svg");
-  
-      if (valorEmAberto !== "R$ 00,00") {
-        svgIcon.style.cursor = "pointer";
-        svgIcon.addEventListener("click", () => openModal(valorEmAberto));
-      }
+        const valorEmAberto = row.querySelector("td:nth-child(5)").textContent.trim();
+        const svgIcon = row.querySelector("svg");
+
+        const dataHora = row.querySelector("td:nth-child(1)").textContent.trim();
+        const servico = row.querySelector("td:nth-child(2)").textContent.trim();
+
+        if (valorEmAberto !== "R$ 00,00") {
+            svgIcon.style.cursor = "pointer";
+            svgIcon.addEventListener("click", () => openModal(dataHora, servico));
+        }
     });
 });
   
-function openModal(valorEmAberto) {
+function openModal(dataHora, servico) {
     const modal = document.getElementById("modal");
     const modalContent = document.getElementById("modal-content");
   
-    modalContent.textContent = `Valor em aberto: ${valorEmAberto}`;
+    modalContent.textContent = `Data e Horário: ${dataHora} Serviço: ${servico}`;
     modal.style.display = "block";
 }
   
