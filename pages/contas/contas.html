@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PróRegister</title>
+    <link rel="icon" href="/assets/images/logo4.png" type="image/x-icon" />
+    <link rel="stylesheet" href="contas.css" />
+    <script src="contas.js" defer></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <form class="form" onsubmit="return false;">
+        <div class="header-container">
+            <svg
+                id="back-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-left"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+                />
+            </svg>
+            <h2>Gerenciar Conta</h2>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="cliente">Cliente</label>
+                <select id="cliente" onchange="toggleForm()">
+                    <option value="" selected disabled></option>
+                    <option value="Julio">Julio Samuel Rodrigues</option>
+                    <option value="Juliano">Juliano Henrique Rodrigues</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="formDetails">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data e Horário</th>
+                        <th>Serviço</th>
+                        <th>Veículo</th>
+                        <th>Valor Pago</th>
+                        <th>Valor em Aberto</th>
+                        <th>Método de Pagamento</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12/08/2024 10:45</td>
+                        <td>Lavagem Expressa</td>
+                        <td>Fiat Uno</td>
+                        <td>R$ 00,00</td>
+                        <td>R$ 30,00</td>
+                        <td>Não efetuado</td>
+                        <td>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                              </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>05/08/2024 15:00</td>
+                        <td>Limpeza Interna</td>
+                        <td>Amarok</td>
+                        <td>R$ 00,00</td>
+                        <td>R$ 50,00</td>
+                        <td>Não Efetuado</td>
+                        <td>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                              </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>02/08/2024 09:50</td>
+                        <td>Instalação de Som</td>
+                        <td>Amarok</td>
+                        <td>R$ 150,00</td>
+                        <td>R$ 00,00</td>
+                        <td>Dinheiro</td>
+                        <td>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                              </svg>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>30/07/2024 18:20</td>
+                        <td>Limpeza Interna</td>
+                        <td>Fiat Uno</td>
+                        <td>R$ 30,00</td>
+                        <td>R$ 00,00</td>
+                        <td>PIX</td>
+                        <td>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                              </svg>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="modal" class="modal">
+                <div class="modal-inner">
+                  <p id="modal-content"></p>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+    <div id="footer"></div>
+</body>
+</html>
