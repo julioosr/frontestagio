@@ -35,4 +35,15 @@ document.addEventListener('DOMContentLoaded', function() {
             settingsModal.style.display = 'none';
         }
     });
+
+    
+    // Direcionamento do nome do sistema
+    // Seleciona o elemento <span> que contém o texto "PróRegister"
+    const titleSpan = document.querySelector('.title-bar span');
+
+    // Adiciona um evento de clique ao <span>
+    titleSpan.addEventListener('click', function() {
+        // Redireciona para a URL especificada
+        window.location.href = '/pages/home/home.html';
+    });
 });

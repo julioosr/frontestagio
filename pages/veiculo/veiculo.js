@@ -7,8 +7,22 @@ function loadHTML(elementId, filePath) {
 
             // Chame a função que inicializa os modais aqui
             initializeModals();
+
+            // Inicializa a lógica do título "PróRegister"
+            initializeTitleRedirect();
         })
         .catch(error => console.error('Erro ao carregar o arquivo:', error));
+}
+
+// Função para inicializar a lógica do título "PróRegister"
+function initializeTitleRedirect() {
+    const titleSpan = document.querySelector('.title-bar span');
+
+    if (titleSpan) {
+        titleSpan.addEventListener('click', function() {
+            window.location.href = '/pages/home/home.html'; // Redireciona para a URL especificada
+        });
+    }
 }
 
 // Carregar o header e footer
