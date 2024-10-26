@@ -151,6 +151,40 @@ tr svg {
     pointer-events: none;
 }
 
+.form-row #adicionar-pagamento {
+    margin-bottom: -6px;
+    margin-top: -8px;
+}
+
+#adicionar-pagamento {
+    height: 30px;
+    padding: 0 15px; 
+    display: inline-block;
+    cursor: pointer;
+}
+
+#pagamentos-selecionados {
+    display: flex; 
+    flex-wrap: wrap; 
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+    margin-top: -17px;
+}
+
+.form-row .pagamentos {
+    font-size: 13px;
+}
+
+#pagamentos-selecionados li {
+    background-color: #f0f0f0; 
+    padding: 6px 10px; 
+    margin-top: 10px;
+    margin: 5px; 
+    border-radius: 5px; 
+    display: inline-block;
+}
+
 /* Modal editar pagamento */
 .modal {
     display: none;
@@ -165,7 +199,7 @@ tr svg {
   
 .modal-inner {
     background-color: #fff;
-    margin: 9% auto;
+    margin: 4% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 300px;
@@ -212,17 +246,6 @@ tr svg {
     margin-right: 5px; 
 }
 
-.modal button {
-    padding: 10px 15px; 
-    background-color: #fefefe; 
-    color: black; 
-    border: 2px solid rgba(215, 51, 37, 0.906); 
-    border-radius: 4px; 
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 14px;
-}
-
 .modal .button-row {
     display: flex;
     justify-content: center; /* Alinha os botões ao centro */
@@ -245,6 +268,11 @@ tr svg {
     border-color: black; 
 }
 
-.modal button:hover {
+.modal #confirmar:hover, .modal #cancelar:hover {
     background-color: #f0eeee; 
+}
+
+#modal-content p {
+    margin: 0; 
+    line-height: 1.2; 
 }
