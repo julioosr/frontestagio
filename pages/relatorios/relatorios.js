@@ -5,11 +5,12 @@ function loadHTML(elementId, filePath) {
         .then(data => {
             document.getElementById(elementId).innerHTML = data;
 
+            // Inicializa a lógica do título "PróRegister"
+            console.log('Inicializando redirecionamento do título');
+            initializeTitleRedirect();
+
             // Chame a função que inicializa os modais aqui
             initializeModals();
-
-            // Inicializa a lógica do título "PróRegister"
-            initializeTitleRedirect();
         })
         .catch(error => console.error('Erro ao carregar o arquivo:', error));
 }
@@ -17,11 +18,14 @@ function loadHTML(elementId, filePath) {
 // Função para inicializar a lógica do título "PróRegister"
 function initializeTitleRedirect() {
     const titleSpan = document.querySelector('.title-bar span');
+    console.log(titleSpan); // Log para verificar se o elemento está sendo encontrado
 
     if (titleSpan) {
         titleSpan.addEventListener('click', function() {
             window.location.href = '/pages/home/home.html'; // Redireciona para a URL especificada
         });
+    } else {
+        console.error('Elemento titleSpan não encontrado'); // Log de erro se o elemento não for encontrado
     }
 }
 
@@ -75,32 +79,11 @@ function initializeModals() {
                 settingsModal.style.display = 'none';
             }
         });
-
-        // Fecha o modal ao clicar fora dele
-        window.addEventListener('click', function(event) {
-        const modal = document.getElementById("modal");
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Fecha o modal ao clicar no botão "Cancelar"
-        document.getElementById("cancelar").addEventListener('click', function() {
-            closeModal();
-        });
-
-        // Fecha o modal ao pressionar a tecla Esc
-        window.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
     }
 }
 
-// função para aparecer relatório
+// Função para verificar se pelo menos uma data está preenchida
 document.addEventListener("DOMContentLoaded", function () {
-    // Função para verificar se pelo menos uma data está preenchida
     function isAnyDateFilled() {
         const dataInicial = document.getElementById("data-inicial").value;
         const dataFinal = document.getElementById("data-final").value;
