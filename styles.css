@@ -73,3 +73,11 @@ h2 {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.img-login {
+  height: 80px;
+  position: absolute;
+  top: 30px;               
+  left: 50%;            
+  transform: translateX(-50%)
+}
