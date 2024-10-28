@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PróRegister</title>
+    <link rel="icon" href="/assets/images/logo4.png" type="image/x-icon" />
+    <link rel="stylesheet" href="relatorios.css" />
+    <script src="relatorios.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <form class="form" onsubmit="return false;">
+        <div class="header-container">
+            <svg
+                id="back-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-left"
+                viewBox="0 0 16 16"
+            >
+                <path
+                    fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+                />
+            </svg>
+            <h2>Relatórios</h2>
+        </div>
+
+        <div id="form-um">  
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cliente">Cliente</label>
+                    <select id="cliente">
+                        <option value="" selected disabled></option>
+                        <option value="Julio">Julio Samuel Rodrigues</option>
+                        <option value="Juliano">Juliano Henrique Rodrigues</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="veiculo">Veículo</label>
+                    <select id="veiculo">
+                        <option value="" selected disabled></option>
+                        <option value="veiculo-um">Veículo 1</option>
+                        <option value="veiculo-dois">Veículo 2</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="servico">Serviço</label>
+                    <select id="servico">
+                        <option value="" selected disabled></option>
+                        <option value="Servico1">Serviço 1</option>
+                        <option value="Servico2">Serviço 2</option>
+                        <option value="Servico3">Serviço 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row-two">
+                <div class="form-group small-group-two">
+                    <label for="data-inicial">Data Inicial</label>
+                    <input type="date" id="data-inicial">
+                </div>
+
+                <div class="form-group small-group-two">
+                    <label for="data-final">Data Final</label>
+                    <input type="date" id="data-final">
+                </div>
+
+                <div class="form-group small-group-two">
+                    <label for="horario-inicial">Horário Inicial</label>
+                    <input type="time" id="horario-inicial">
+                </div>
+
+                <div class="form-group small-group-two">
+                    <label for="horario-final">Horário Final</label>
+                    <input type="time" id="horario-final">
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" id="gerar-relatorio">Gerar</button>
+            </div>
+        </div>        
+
+        <div id="formDetails">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data e Horário</th>
+                        <th>Cliente</th>
+                        <th>Veículo</th>
+                        <th>Serviço</th>
+                        <th>Valor Pago</th>
+                        <th>Valor em Aberto</th>
+                        <th>Método de Pagamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12/08/2024 10:45</td>
+                        <td>Julio Samuel Rodrigues</td>
+                        <td>Fiat Uno</td>
+                        <td>Lavagem Expressa</td>
+                        <td>R$ 00,00</td>
+                        <td>R$ 30,00</td>
+                        <td>Não efetuado</td>
+                    </tr>
+                    <tr>
+                        <td>05/08/2024 15:00</td>
+                        <td>Julio Samuel Rodrigues</td>
+                        <td>Amarok</td>
+                        <td>Limpeza Interna</td>
+                        <td>R$ 00,00</td>
+                        <td>R$ 50,00</td>
+                        <td>Não efetuado</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="button-container">
+                <button type="button" onclick="exportToExcel()">Imprimir
+                    <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-file-earmark-excel" viewBox="0 0 16 16">
+                        <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div id="footer"></div>
+</body>
+</html>
