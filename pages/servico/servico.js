@@ -76,27 +76,4 @@ function initializeModals() {
             }
         });
     }
-
-    // formatação input
-    document.getElementById('valor').addEventListener('input', function (e) {
-        let value = e.target.value;
-
-        // Remove todos os caracteres que não são números
-        value = value.replace(/\D/g, '');
-
-        // Se não houver valor, exibe R$ 0,00
-        if (value.length === 0) {
-            e.target.value = 'R$ 0,00';
-            return;
-        }
-
-        // Divide por 100 para obter o formato correto
-        value = (parseFloat(value) / 100).toFixed(2);
-
-        // Substitui ponto por vírgula para o formato BR
-        value = value.replace('.', ',');
-
-        // Adiciona "R$ " no início
-        e.target.value = 'R$ ' + value;
-    });
 }

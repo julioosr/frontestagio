@@ -51,6 +51,7 @@ async function showClienteInfo() {
         const endereco = await response.json();
 
         document.getElementById('cep').value = endereco.cep;
+        document.getElementById('idEndereco').value = endereco.id; 
         document.getElementById('rua').value = endereco.rua;
         document.getElementById('numero').value = endereco.numero;
         document.getElementById('bairro').value = endereco.bairro;
@@ -158,13 +159,13 @@ async function redirectToHome() {
     const cpfCnpj = document.getElementById('cpf1').value;
     const telefone = document.getElementById('telefone').value;
     const email = document.getElementById('email').value;
-    /*const cep = document.getElementById('cep').value;
+    const enderecoId = document.getElementById('idEndereco').value;
+    const municipioId = document.getElementById('municipio').value;
+    const cep = document.getElementById('cep').value;
     const rua = document.getElementById('rua').value;
     const numero = document.getElementById('numero').value;
     const bairro = document.getElementById('bairro').value;
     const complemento = document.getElementById('complemento').value;
-    const uf = document.getElementById('uf').value;
-    const municipioId = document.getElementById('municipio').value;*/
 
     try {
         // Realiza a requisição PUT para atualizar os dados do cliente
@@ -178,18 +179,6 @@ async function redirectToHome() {
                 cpfCnpj: cpfCnpj,
                 telefone: telefone,
                 email: email
-                
-                /* endereco: {
-                    cep: cep,
-                    rua: rua,
-                    numero: numero,
-                    bairro: bairro,
-                    complemento: complemento
-                },
-                municipio: {
-                    id: municipioId,
-                    uf: uf
-                } */
             })
         });
 
@@ -205,4 +194,34 @@ async function redirectToHome() {
         console.error('Erro ao atualizar os dados:', error);
         alert('Ocorreu um erro ao atualizar os dados. Tente novamente.');
     }
+
+    try {
+        const enderecoResponse = await fetch(`http://localhost:8080/endereco/${enderecoId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cliente: { id: clienteId },
+                cep: cep,
+                rua: rua,
+                numero: numero,
+                bairro: bairro,
+                complemento: complemento,
+                municipio: { id: municipioId }
+            })
+        });
+
+        if (!enderecoResponse.ok) {
+            throw new Error('Erro ao atualizar o endereço');
+        }
+
+        // Atualização foi bem-sucedida
+        alert('Endereço atualizado com sucesso!');
+        closeModal(); // Fecha o modal
+        window.location.reload(); // Atualiza a página
+    } catch (error) {
+            console.error('Erro ao atualizar o endereço:', error);
+            alert('Endereço atualizado com sucesso!');
+        }
 }
