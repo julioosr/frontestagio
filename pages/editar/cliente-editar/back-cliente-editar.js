@@ -14,6 +14,9 @@ async function loadClientes() {
 
         const clientes = await response.json();
 
+        // Ordenar clientes em ordem alfabética pelo nome
+        clientes.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+
         // Obtenha o elemento <select>
         const clienteSelect = document.getElementById('cliente');
 
@@ -69,7 +72,7 @@ async function showClienteInfo() {
     }
 }
 
-// Função para carregar os UFs únicos
+// Função para carregar os UFs únicos em ordem alfabética
 function carregarUFs() {
     fetch("http://localhost:8080/municipio")
         .then(response => response.json())
@@ -77,18 +80,16 @@ function carregarUFs() {
             const ufSelect = document.getElementById("uf");
             const ufs = new Set();
 
-            // Adicionar os UFs ao Set
+            // Adicionar os UFs ao Set para garantir que sejam únicos
             data.forEach(municipio => {
                 ufs.add(municipio.uf);
             });
 
-            // Converter o Set em um array e ordenar alfabeticamente
-            const ufsOrdenados = Array.from(ufs).sort();
-
-            // Limpar as opções existentes e adicionar o placeholder
+            // Converter o Set em um array, ordenar alfabeticamente, e limpar o <select>
+            const ufsOrdenados = Array.from(ufs).sort((a, b) => a.localeCompare(b, 'pt-BR'));
             ufSelect.innerHTML = '<option value="" selected disabled>Selecione um UF</option>';
 
-            // Adicionar os UFs únicos e ordenados ao select de UF
+            // Adicionar os UFs únicos e ordenados ao <select> de UF
             ufsOrdenados.forEach(uf => {
                 const option = document.createElement("option");
                 option.value = uf;
@@ -106,35 +107,38 @@ function carregarUFs() {
         });
 }
 
-// Função para carregar os municípios conforme o UF selecionado
+// Função para carregar os municípios conforme o UF selecionado, em ordem alfabética
 function carregarMunicipios(uf, municipioIdSelecionado = null) {
     const municipioSelect = document.getElementById("municipio");
 
     fetch("http://localhost:8080/municipio")
         .then(response => response.json())
         .then(municipios => {
+            // Filtrar os municípios pela UF
+            const municipiosFiltrados = municipios
+                .filter(municipio => municipio.uf === uf)
+                .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+
             // Limpar as opções existentes e adicionar o placeholder
             municipioSelect.innerHTML = '<option value="" disabled>Selecione um Município</option>';
 
-            // Filtrar os municípios pela UF e adicionar ao select
-            municipios
-                .filter(municipio => municipio.uf === uf)
-                .forEach(municipio => {
-                    const option = document.createElement("option");
-                    option.value = municipio.id;
-                    option.textContent = municipio.nome;
-                    if (municipio.id === municipioIdSelecionado) {
-                        option.selected = true; // Selecionar o município retornado, se especificado
-                    }
-                    municipioSelect.appendChild(option);
-                });
+            // Adicionar os municípios filtrados e ordenados ao <select>
+            municipiosFiltrados.forEach(municipio => {
+                const option = document.createElement("option");
+                option.value = municipio.id;
+                option.textContent = municipio.nome;
+                if (municipio.id === municipioIdSelecionado) {
+                    option.selected = true; // Selecionar o município retornado, se especificado
+                }
+                municipioSelect.appendChild(option);
+            });
         })
         .catch(error => {
             console.error("Erro ao carregar os municípios:", error);
         });
 }
 
-// Chamar as funções para carregar os UFs e buscar informações do cliente
+// Chamar as funções ao carregar a página
 window.onload = () => {
     loadClientes();
     carregarUFs();

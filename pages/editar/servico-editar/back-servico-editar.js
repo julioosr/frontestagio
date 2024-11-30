@@ -10,25 +10,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para carregar os serviços cadastrados
     async function loadServicos() {
-        try {
-            const response = await fetch('http://localhost:8080/servico');
-            if (!response.ok) {
-                throw new Error('Erro ao carregar os serviços.');
-            }
-
-            const servicos = await response.json();
-
-            servicoSelect.innerHTML = '<option value="" selected disabled>Escolha um serviço</option>'; 
-            servicos.forEach((servico) => {
-                const option = document.createElement('option');
-                option.value = servico.servicoID;  
-                option.textContent = servico.nome;
-                servicoSelect.appendChild(option);
-            });
-        } catch (error) {
-            console.error('Erro ao carregar serviços:', error);
+    try {
+        const response = await fetch('http://localhost:8080/servico');
+        if (!response.ok) {
+            throw new Error('Erro ao carregar os serviços.');
         }
+
+        const servicos = await response.json();
+
+        // Ordenar os serviços por nome em ordem alfabética
+        servicos.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+
+        // Preencher o select com as opções ordenadas
+        servicoSelect.innerHTML = '<option value="" selected disabled>Escolha um serviço</option>';
+        servicos.forEach((servico) => {
+            const option = document.createElement('option');
+            option.value = servico.servicoID;
+            option.textContent = servico.nome;
+            servicoSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Erro ao carregar serviços:', error);
     }
+}
+
 
     // Função para preencher os campos do formulário ao selecionar um serviço
     async function loadServicoDetails(servicoId) {

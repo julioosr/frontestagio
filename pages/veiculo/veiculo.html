@@ -7,11 +7,12 @@
     <link rel="icon" href="/assets/images/logo4.png" type="image/x-icon" />
     <link rel="stylesheet" href="veiculo.css">
     <script src="veiculo.js"></script>
+    <script src="back-veiculo.js"></script>
 </head>
 <body>
     <div id="header"></div>
 
-    <form class="form">
+    <form class="form" onsubmit="event.preventDefault();">
         <div class="header-container">
             <svg id="back-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
@@ -22,7 +23,9 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="marca">Marca</label>
-                <input type="text" id="marca">
+                <select id="marca" required>
+                    <option value="" selected disabled></option>
+                </select>
             </div>
 
             <div class="form-group">
@@ -38,6 +41,7 @@
             </div>
 
             <div class="form-group">
+                <input type="hidden" id="idMarca">
                 <label for="cor">Cor</label>
                 <input type="text" id="cor">
             </div>
@@ -58,8 +62,6 @@
                 <label for="cliente">Cliente</label>
                 <select id="cliente" required>
                     <option value="" selected disabled></option>
-                    <option value="Julio">Julio Samuel Rodrigues</option>
-                    <option value="Juliano">Juliano Henrique Rodrigues</option>
                 </select>
             </div>
         </div>

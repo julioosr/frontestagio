@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
 
         try {
-            // Enviar dados do Cliente
             const municipioResponse = await fetch(`http://localhost:8080/municipio/${document.getElementById('municipio').value}`, {
                 method: 'GET',
                 headers: {
