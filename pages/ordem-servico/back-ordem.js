@@ -1,8 +1,94 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Carregar os dados ao iniciar a página
     loadClientes();
     loadServicos();
     loadFormasPagamento();
+});
+
+document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Previne o envio padrão do formulário
+
+    // Coleta os dados do formulário
+    const clienteId = document.getElementById("cliente").value;
+    const veiculoId = document.getElementById("veiculo").value;
+    const servicoId = document.getElementById("servico").value;
+    const data = document.getElementById("data").value;
+    const horario = document.getElementById("horario").value;
+    const valorPago = parseFloat(document.getElementById("valor-pago").value.replace('R$', '').replace(',', '.'));
+    const desconto = parseFloat(document.getElementById("desconto").value.replace('R$', '').replace(',', '.'));
+    const valorEmAberto = parseFloat(document.getElementById("valor-em-aberto").value.replace('R$', '').replace(',', '.'));
+    const formaPagamentoId = document.getElementById("forma-pagamento").value;
+
+    // Lógica para o campo 'total' na tabela 'os' (se valor pago for 0,00, é a soma do desconto e valor em aberto)
+    const total = valorPago === 0 ? desconto + valorEmAberto : valorPago;
+
+    // Enviar dados para a tabela 'os'
+    const osData = {
+        ordemid: null, // ID gerado pelo banco ou pelo backend
+        horario: horario,
+        datarealizada: data,
+        total: total,
+        cliente: clienteId,
+        veiculo: veiculoId,
+        usuario: null
+    };
+
+    fetch("http://localhost:8080/os", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(osData)
+    })
+    .then(response => response.json())
+    .then(os => {
+        // Enviar dados para a tabela 'ositem'
+        const osItemData = {
+            servico: servicoId,
+            os: os.ordemid, // ID da OS gerada
+            usuario: null,
+            data: data,
+            quantidade: 1,
+            preco_unitario: document.querySelector(`#servico option[value="${servicoId}"]`).dataset.preco
+        };
+
+        return fetch("http://localhost:8080/ositem", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(osItemData)
+        });
+    })
+    .then(response => response.json())
+    .then(osItem => {
+        // Enviar dados para a tabela 'recebimento'
+        const recebimentoData = {
+            recebimentoid: null, // ID gerado pelo banco ou pelo backend
+            data: data,
+            valor: document.querySelector(`#servico option[value="${servicoId}"]`).dataset.preco,
+            desconto: desconto,
+            os: osItem.os,
+            formapgto: formaPagamentoId,
+            usuario: null,
+            valor_em_aberto: valorEmAberto
+        };
+
+        return fetch("http://localhost:8080/recebimento", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(recebimentoData)
+        });
+    })
+    .then(response => response.json())
+    .then(recebimento => {
+        alert("Serviço lançado com sucesso!");
+    })
+    .catch(error => {
+        console.error("Erro ao lançar o serviço:", error);
+        alert("Erro ao lançar o serviço. Tente novamente.");
+    });
 });
 
 // Função para carregar os clientes
