@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Carregar os dados ao iniciar a página
     loadClientes();
-    loadVeiculos();
     loadServicos();
     loadFormasPagamento();
 });
@@ -23,21 +22,44 @@ function loadClientes() {
                 option.textContent = cliente.nome;
                 clienteSelect.appendChild(option);
             });
+
+            // Adiciona o listener para carregar veículos quando o cliente for selecionado
+            clienteSelect.addEventListener("change", function () {
+                const clienteId = this.value;
+                loadVeiculos(clienteId);  // Chama a função para carregar veículos do cliente selecionado
+            });
         })
         .catch(error => {
             console.error("Erro ao carregar os clientes:", error);
         });
 }
 
-// Função para carregar os veículos
-function loadVeiculos() {
-    fetch("http://localhost:8080/veiculo")
-        .then(response => response.json())
+// Função para carregar os veículos de um cliente
+function loadVeiculos(clienteId) {
+    // Se nenhum cliente for selecionado, não faz a requisição
+    if (!clienteId) return;
+
+    fetch(`http://localhost:8080/veiculo/cliente/${clienteId}`)
+        .then(response => {
+            if (response.status === 204) { // No content (sem veículos)
+                return []; // Retorna um array vazio, indicando que não há veículos
+            }
+            return response.json(); // Se houver conteúdo, converte para JSON
+        })
         .then(veiculos => {
             const veiculoSelect = document.getElementById("veiculo");
             veiculoSelect.innerHTML = "<option value='' selected disabled>Escolha o veículo</option>"; // Limpa a lista antes de adicionar as opções
 
-            // Ordenar os veículos por marca e modelo
+            if (veiculos.length === 0) {
+                // Se não houver veículos, cria um campo sem texto e não selecionável
+                const option = document.createElement("option");
+                option.value = ''; // Não tem valor
+                option.disabled = true; // Não pode ser selecionado
+                veiculoSelect.appendChild(option);
+                return; // Saímos da função
+            }
+
+            // Ordenar os veículos
             veiculos.sort((a, b) => `${a.marca.descricao} - ${a.modelo} - ${a.placa}`.localeCompare(`${b.marca.descricao} - ${b.modelo} - ${b.placa}`));
 
             veiculos.forEach(veiculo => {
@@ -67,7 +89,23 @@ function loadServicos() {
                 const option = document.createElement("option");
                 option.value = servico.id;
                 option.textContent = servico.descricao;
+                option.dataset.preco = servico.preco; // Armazenar o preço do serviço no atributo data-preco
                 servicoSelect.appendChild(option);
+            });
+
+            // Adiciona o evento de mudança no serviço
+            servicoSelect.addEventListener("change", function () {
+                const selectedOption = this.options[this.selectedIndex];
+                const preco = selectedOption.dataset.preco; // Pega o preço armazenado no data-preco
+
+                // Formatar o valor para o formato R$ 00,00
+                const valorFormatado = new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }).format(preco);
+
+                // Preenche o campo "Valor em Aberto" com o valor formatado
+                document.getElementById("valor-em-aberto").value = valorFormatado;
             });
         })
         .catch(error => {
