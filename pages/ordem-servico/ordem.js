@@ -117,10 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Verifica se algum serviço foi selecionado
         if (selectedOption.value) {
-            // Remove o item "Nenhum serviço selecionado"
-            if (servicosSelecionadosDiv.firstChild.textContent === 'Nenhum serviço selecionado') {
-                servicosSelecionadosDiv.innerHTML = ''; // Limpa a lista
-            }
+            // Remove todos os serviços anteriores (se houver)
+            servicosSelecionadosDiv.innerHTML = ''; // Limpa a lista
 
             // Cria um item de lista (li) para o serviço selecionado
             const novoServico = document.createElement('li');
@@ -149,6 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Reabilita a opção correspondente no select
                 selectedOption.disabled = false;
 
+                // Habilita todas as opções no select novamente
+                for (let i = 0; i < servicoSelect.options.length; i++) {
+                    servicoSelect.options[i].disabled = false;
+                }
+
                 // Se a lista ficar vazia, adiciona novamente "Nenhum serviço selecionado"
                 if (servicosSelecionadosDiv.children.length === 0) {
                     servicosSelecionadosDiv.appendChild(nenhumServico);
@@ -164,6 +167,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Desabilita a opção selecionada no select
             selectedOption.disabled = true;
 
+            // Desabilita todas as outras opções de serviço
+            for (let i = 0; i < servicoSelect.options.length; i++) {
+                if (servicoSelect.options[i] !== selectedOption) {
+                    servicoSelect.options[i].disabled = true;
+                }
+            }
+
             // Reseta o select para o estado inicial
             servicoSelect.selectedIndex = 0;
         }
@@ -176,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const pagamentoSelect = document.getElementById('forma-pagamento');
     const pagamentosSelecionadosDiv = document.getElementById('pagamentos-selecionados');
     const adicionarPagamentoBtn = document.getElementById('adicionar-pagamento');
-    const opcaoNaoEfetuado = pagamentoSelect.querySelector('option[value="Nao-efetuado"]');
 
     // Adiciona o item "Nenhum pagamento selecionado" inicialmente
     const nenhumPagamento = document.createElement('li');
@@ -220,19 +229,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Reabilita a opção correspondente no select
                 selectedOption.disabled = false;
 
-                // Se "Não Efetuado" foi selecionado, reabilita todas as opções
-                if (selectedOption.value === 'Nao-efetuado') {
-                    for (let i = 0; i < pagamentoSelect.options.length; i++) {
-                        pagamentoSelect.options[i].disabled = false;
-                    }
-                } else {
-                    // Reabilita a opção "Não Efetuado"
-                    opcaoNaoEfetuado.disabled = false;
-                }
-
                 // Se a lista ficar vazia, adiciona novamente "Nenhum pagamento selecionado"
                 if (pagamentosSelecionadosDiv.children.length === 0) {
                     pagamentosSelecionadosDiv.appendChild(nenhumPagamento);
+                }
+
+                // Reabilita todas as opções no select quando uma opção é removida
+                for (let i = 0; i < pagamentoSelect.options.length; i++) {
+                    pagamentoSelect.options[i].disabled = false;
                 }
             });
 
@@ -245,16 +249,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Desabilita a opção selecionada no select
             selectedOption.disabled = true;
 
-            // Se "Não Efetuado" for selecionado, desabilita todas as outras opções
-            if (selectedOption.value === 'Nao-efetuado') {
-                for (let i = 0; i < pagamentoSelect.options.length; i++) {
-                    if (pagamentoSelect.options[i].value !== 'Nao-efetuado') {
-                        pagamentoSelect.options[i].disabled = true;
-                    }
+            // Desabilita todas as outras opções no select
+            for (let i = 0; i < pagamentoSelect.options.length; i++) {
+                if (pagamentoSelect.options[i] !== selectedOption) {
+                    pagamentoSelect.options[i].disabled = true;
                 }
-            } else {
-                // Se outra opção for selecionada, desabilita a opção "Não Efetuado"
-                opcaoNaoEfetuado.disabled = true;
             }
 
             // Reseta o select para o estado inicial
@@ -262,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 // Função para habilitar digitar valores
 document.addEventListener("DOMContentLoaded", () => {

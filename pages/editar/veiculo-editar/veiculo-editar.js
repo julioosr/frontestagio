@@ -161,7 +161,3 @@ function validateForm() {
         form.reportValidity(); // Mostra os erros de validação do HTML5
     }
 }
-
-function redirectToHome() {
-    window.location.href = '/pages/editar/home-editar/home-editar.html';
-}
