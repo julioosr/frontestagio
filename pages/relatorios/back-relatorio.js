@@ -49,7 +49,7 @@ const carregarDadosDoCliente = async (clienteId) => {
 
             const veiculoCell = document.createElement("td");
             // Concatenando modelo e placa
-            veiculoCell.textContent = `${os.veiculo.modelo || "Não informado"} - ${os.veiculo.placa || "Não informado"}`;
+            veiculoCell.textContent = `${os.veiculo.marca.descricao || "Não informado"} - ${os.veiculo.modelo || "Não informado"} - ${os.veiculo.placa || "Não informado"}`;
             row.appendChild(veiculoCell);
 
             const servicoCell = document.createElement("td");
@@ -66,7 +66,6 @@ const carregarDadosDoCliente = async (clienteId) => {
         console.error("Erro ao carregar dados do cliente:", error);
     }
 };
-
 
     // Listener para o botão "Gerar"
     gerarRelatorioBtn.addEventListener("click", () => {

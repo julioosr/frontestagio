@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let idServico = document.getElementById('servico').value;
         let valorPago = removeFormatting(document.getElementById('valor-pago').value);
         let desconto = removeFormatting(document.getElementById('desconto').value);
-        let valorAberto = removeFormatting(document.getElementById('valor-em-aberto').value);
-        let formaPagamento = document.getElementById('forma-pagamento').value;
+        let valor_em_aberto = removeFormatting(document.getElementById('valor-em-aberto').value);
+        let formaPgto = document.getElementById('forma-pagamento').value;
 
         // Calcula o total com base nas condições
         let total = valorPago > 0 ? valorPago + desconto : desconto + valorAberto;
@@ -58,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: document.getElementById('data').value,
                 valor: valorPago,
                 desconto: desconto,
-                os: osId, 
-                formaPgto: formaPagamento,
+                os: { id: osId }, 
+                formaPgto: { id: formaPgto },
                 usuario: null, 
-                valor_em_aberto: valorAberto
+                valor_em_aberto: valor_em_aberto
             };
 
             // POST para Recebimento

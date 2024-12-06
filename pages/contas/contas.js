@@ -206,7 +206,7 @@ formatCurrency('valor-pago');
 formatCurrency('desconto');
 formatCurrency('valor-em-aberto');
 
-// Função para adicionar pagamentos à lista
+/* // Função para adicionar pagamentos à lista
 document.addEventListener('DOMContentLoaded', () => {
     const pagamentoSelect = document.getElementById('forma-pagamento');
     const pagamentosSelecionadosDiv = document.getElementById('pagamentos-selecionados');
@@ -285,4 +285,4 @@ document.addEventListener('DOMContentLoaded', () => {
             pagamentoSelect.selectedIndex = 0;
         }
     });
-});
+}); */

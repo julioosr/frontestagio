@@ -33,9 +33,10 @@
 
         <div class="form-row">
             <div class="form-group">
-                <label for="cliente">Cliente</label>
+                <label for="cliente">Ordens de Serviço</label>
                 <select id="cliente" onchange="toggleForm()">
                     <option value="" selected disabled></option>
+                    <option value="Todas">Todas as Ordens de Serviço</option>
                 </select>
             </div>
         </div>
@@ -115,16 +116,19 @@
                     <p id="modal-content"></p>
                     <div class="form-row">
                         <div class="form-group">
+                            <input type="hidden" id="data">
                             <label for="valor-pago">Valor Pago</label>
                             <input type="text" id="valor-pago" required>
                         </div>
             
                         <div class="form-group">
+                            <input type="hidden" id="os-id">
                             <label for="desconto">Desconto</label>
                             <input type="text" id="desconto" required>
                         </div>
             
                         <div class="form-group">
+                            <input type="hidden" id="usuario-id">
                             <label for="valor-em-aberto">Valor em Aberto</label>
                             <input type="text" id="valor-em-aberto" required>
                         </div>
@@ -136,10 +140,6 @@
                             <label for="forma-pagamento">Forma de Pagamento</label>
                             <select id="forma-pagamento">
                                 <option value="" selected disabled></option>
-                                <option value="Nao-efetuado">Não Efetuado</option>
-                                <option value="Dinheiro">Dinheiro</option>
-                                <option value="Pix">Pix</option>
-                                <option value="Cartao">Cartão</option>
                             </select>
                         </div>
                          <!--  <button type="button" id="adicionar-pagamento">Adicionar Pagamento</button> -->
