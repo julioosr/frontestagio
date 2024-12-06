@@ -102,7 +102,7 @@ function initializeModals() {
 }
 
 // Função para adicionar serviços à lista
-document.addEventListener('DOMContentLoaded', () => {
+/* document.addEventListener('DOMContentLoaded', () => {
     const servicoSelect = document.getElementById('servico');
     const servicosSelecionadosDiv = document.getElementById('servicos-selecionados');
     const adicionarServicoBtn = document.getElementById('adicionar-servico');
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
+*/
 
 // Função para habilitar digitar valores
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,95 +1,93 @@
-document.addEventListener("DOMContentLoaded", function () {
-    loadClientes();
-    loadServicos();
-    loadFormasPagamento();
-});
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.form');
 
-document.querySelector("form").addEventListener("submit", function (event) {
-    event.preventDefault(); // Previne o envio padrão do formulário
-
-    // Coleta os dados do formulário
-    const clienteId = document.getElementById("cliente").value;
-    const veiculoId = document.getElementById("veiculo").value;
-    const servicoId = document.getElementById("servico").value;
-    const data = document.getElementById("data").value;
-    const horario = document.getElementById("horario").value;
-    const valorPago = parseFloat(document.getElementById("valor-pago").value.replace('R$', '').replace(',', '.'));
-    const desconto = parseFloat(document.getElementById("desconto").value.replace('R$', '').replace(',', '.'));
-    const valorEmAberto = parseFloat(document.getElementById("valor-em-aberto").value.replace('R$', '').replace(',', '.'));
-    const formaPagamentoId = document.getElementById("forma-pagamento").value;
-
-    // Lógica para o campo 'total' na tabela 'os' (se valor pago for 0,00, é a soma do desconto e valor em aberto)
-    const total = valorPago === 0 ? desconto + valorEmAberto : valorPago;
-
-    // Enviar dados para a tabela 'os'
-    const osData = {
-        ordemid: null, // ID gerado pelo banco ou pelo backend
-        horario: horario,
-        datarealizada: data,
-        total: total,
-        cliente: clienteId,
-        veiculo: veiculoId,
-        usuario: null
+    // Função para remover a formatação do valor monetário
+    const removeFormatting = (value) => {
+        return parseFloat(value.replace('R$', '').replace('.', '').replace(',', '.').trim()) || 0;
     };
 
-    fetch("http://localhost:8080/os", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(osData)
-    })
-    .then(response => response.json())
-    .then(os => {
-        // Enviar dados para a tabela 'ositem'
-        const osItemData = {
-            servico: servicoId,
-            os: os.ordemid, // ID da OS gerada
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        // Captura os valores do formulário
+        let idServico = document.getElementById('servico').value;
+        let valorPago = removeFormatting(document.getElementById('valor-pago').value);
+        let desconto = removeFormatting(document.getElementById('desconto').value);
+        let valorAberto = removeFormatting(document.getElementById('valor-em-aberto').value);
+        let formaPagamento = document.getElementById('forma-pagamento').value;
+
+        // Calcula o total com base nas condições
+        let total = valorPago > 0 ? valorPago + desconto : desconto + valorAberto;
+
+        // Dados da ordem de serviço (OS)
+        const osData = {
+            dataAgenda: null,
+            horario: document.getElementById('horario').value,
+            dataRealizada: document.getElementById('data').value,
+            total: total,
+            cliente: { id: parseInt(document.getElementById('cliente').value) },
+            veiculo: { id: parseInt(document.getElementById('veiculo').value) },
             usuario: null,
-            data: data,
-            quantidade: 1,
-            preco_unitario: document.querySelector(`#servico option[value="${servicoId}"]`).dataset.preco
+            servico: { servicoID: idServico }
         };
 
-        return fetch("http://localhost:8080/ositem", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(osItemData)
-        });
-    })
-    .then(response => response.json())
-    .then(osItem => {
-        // Enviar dados para a tabela 'recebimento'
-        const recebimentoData = {
-            recebimentoid: null, // ID gerado pelo banco ou pelo backend
-            data: data,
-            valor: document.querySelector(`#servico option[value="${servicoId}"]`).dataset.preco,
-            desconto: desconto,
-            os: osItem.os,
-            formapgto: formaPagamentoId,
-            usuario: null,
-            valor_em_aberto: valorEmAberto
-        };
+        // Tente enviar a ordem de serviço e obter o ID gerado
+        try {
+            const osResponse = await fetch('http://localhost:8080/ordemservico', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(osData)
+            });
 
-        return fetch("http://localhost:8080/recebimento", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(recebimentoData)
-        });
-    })
-    .then(response => response.json())
-    .then(recebimento => {
-        alert("Serviço lançado com sucesso!");
-    })
-    .catch(error => {
-        console.error("Erro ao lançar o serviço:", error);
-        alert("Erro ao lançar o serviço. Tente novamente.");
+            if (!osResponse.ok) {
+                const osErrorResponse = await osResponse.json();
+                console.error(`Erro ao lançar ordem de serviço: ${osErrorResponse.message || 'Erro desconhecido.'}`);
+                alert(`Erro ao lançar ordem de serviço: ${osErrorResponse.message || 'Verifique os dados.'}`);
+                return;
+            }
+
+            const osResponseData = await osResponse.json();  
+            const osId = osResponseData.id; 
+
+            console.log('Ordem de serviço lançada com sucesso!');
+
+            // Dados do recebimento com o ID da OS gerada
+            const recebimentoData = {
+                data: document.getElementById('data').value,
+                valor: valorPago,
+                desconto: desconto,
+                os: osId, 
+                formaPgto: formaPagamento,
+                usuario: null, 
+                valor_em_aberto: valorAberto
+            };
+
+            // POST para Recebimento
+            const recebimentoResponse = await fetch('http://localhost:8080/recebimento', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(recebimentoData)
+            });
+
+            if (recebimentoResponse.ok) {
+                alert('Recebimento registrado com sucesso!');
+                form.reset();
+            } else {
+                const recebimentoErrorResponse = await recebimentoResponse.json();
+                alert(`Erro ao registrar recebimento: ${recebimentoErrorResponse.message || 'Verifique os dados.'}`);
+            }
+
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+            alert('Ocorreu um erro ao se conectar com o servidor.');
+        }
     });
 });
+
 
 // Função para carregar os clientes
 function loadClientes() {
@@ -173,7 +171,7 @@ function loadServicos() {
 
             servicos.forEach(servico => {
                 const option = document.createElement("option");
-                option.value = servico.id;
+                option.value = servico.servicoID;
                 option.textContent = servico.descricao;
                 option.dataset.preco = servico.preco; // Armazenar o preço do serviço no atributo data-preco
                 servicoSelect.appendChild(option);
@@ -212,7 +210,7 @@ function loadFormasPagamento() {
 
             formasPgto.forEach(formaPgto => {
                 const option = document.createElement("option");
-                option.value = formaPgto.pgtoid;
+                option.value = formaPgto.id;
                 option.textContent = formaPgto.descricao;
                 formaPgtoSelect.appendChild(option);
             });
@@ -221,3 +219,9 @@ function loadFormasPagamento() {
             console.error("Erro ao carregar as formas de pagamento:", error);
         });
 }
+
+window.onload = () => {
+    loadClientes();
+    loadServicos();
+    loadFormasPagamento();
+};

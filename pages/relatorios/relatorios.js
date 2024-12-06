@@ -84,11 +84,11 @@ function initializeModals() {
 
 // Função para verificar se pelo menos uma data está preenchida
 document.addEventListener("DOMContentLoaded", function () {
-    function isAnyDateFilled() {
+    /* function isAnyDateFilled() {
         const dataInicial = document.getElementById("data-inicial").value;
         const dataFinal = document.getElementById("data-final").value;
         return dataInicial || dataFinal; // Verifica se pelo menos uma das datas está preenchida
-    }
+    } */
 
     // Função para alternar a visibilidade do formulário e dos detalhes
     function toggleFormVisibility(event) {
@@ -96,13 +96,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const formDetails = document.getElementById("formDetails");
         const formUm = document.getElementById("form-um");
-        const horarioInicial = document.getElementById("horario-inicial").value;
+        /* const horarioInicial = document.getElementById("horario-inicial").value;
         const horarioFinal = document.getElementById("horario-final").value;
 
         // Verifica se os campos de horário estão preenchidos
         if ((horarioInicial || horarioFinal) && !isAnyDateFilled()) {
             return; // Interrompe a execução da função
-        }
+        } */
 
         // Se todas as validações passarem, esconde o form-um e mostra o formDetails
         formUm.style.display = 'none'; // Esconde o formulário
@@ -138,7 +138,7 @@ function exportToExcel() {
     });
 
     // Adiciona os dados formatados à planilha
-    const ws = XLSX.utils.aoa_to_sheet([["Data e Horário", "Cliente", "Veículo", "Serviço", "Valor Pago", "Valor em Aberto", "Método de Pagamento"], ...sheetData]);
+    const ws = XLSX.utils.aoa_to_sheet([["Data e Horário", "Cliente", "Veículo", "Serviço", "Valor Pago"], ...sheetData]);
 
     // Configura a largura das colunas para 137 pixels
     ws["!cols"] = [
@@ -147,8 +147,6 @@ function exportToExcel() {
         { wpx: 137 }, // Veículo
         { wpx: 137 }, // Serviço
         { wpx: 137 }, // Valor Pago
-        { wpx: 137 }, // Valor em Aberto
-        { wpx: 137 }, // Método de Pagamento
     ];
 
     // Gera a data atual no formato "dd-mm-aaaa"
