@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let formaPgto = document.getElementById('forma-pagamento').value;
 
         // Calcula o total com base nas condições
-        let total = valorPago > 0 ? valorPago + desconto : desconto + valorAberto;
+        let total = valorPago > 0 ? valorPago + desconto : desconto + valor_em_aberto;
 
         // Dados da ordem de serviço (OS)
         const osData = {
